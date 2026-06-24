@@ -1,6 +1,5 @@
 <#
 .SYNOPSIS
-    Author:     Curt Harter    
     Purpose:    Report Entra/Intune status from consumed device input.
 
 .DESCRIPTION
