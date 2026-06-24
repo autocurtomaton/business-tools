@@ -11,7 +11,7 @@ do{
         do{
             #Clear screen, show instructions
             Clear-Host
-            Get-Content _readme.txt | Write-Host
+            Get-Content _showtext.txt | Write-Host
 
             #Accept LDAP search term from user, repeat while input is null
             $searchTerm = Read-Host -Prompt 'Enter search term'
@@ -23,7 +23,7 @@ do{
         Write-Host -NoNewline "`n[Groups Located]:"
                 
         #$GroupList = Get-ADGroup -Filter {Name -like $searchTerm} | Select-Object -Property Name | Format-Table
-        if ($Groups -eq $null) {Write-Host ' NO GROUPS LOCATED -- Press ENTER to try again'; Read-Host}
+        if ($null -eq $Groups) {Write-Host ' NO GROUPS LOCATED -- Press ENTER to try again'; Read-Host}
         else {
         $Groups | Select-Object -Property Name | Format-Table
 
@@ -44,17 +44,17 @@ do{
     Write-Host "Format is attribute1,attribute2,attribute3,..."
     $filters = Read-Host "(Example -- name,samaccountname,mail) "
     
-    #Interate through matching groups 
+    #Iterate through matching groups 
     foreach ($Group in $Groups) {
 
         #-l filters column output for LDAP query, removing this parameter will output all possible LDAP attributes
         #samaccountname = output usernames
 
 
-        $args = '-r ' + '"(&(objectCategory=user)(memberOf=' + $Group.DistinguishedName + '))" ' + '-n -l ' + $filters + ' -f ' + '.\' + '"' + $Group.Name + '_powershell_' + $seed + '.csv"'
+        $csvdeArgs = '-r ' + '"(&(objectCategory=user)(memberOf=' + $Group.DistinguishedName + '))" ' + '-n -l ' + $filters + ' -f ' + '.\' + '"' + $Group.Name + '_powershell_' + $seed + '.csv"'
         
-        #$args
-        Invoke-Expression "csvde.exe $args"
+        #$csvdeArgs
+        Invoke-Expression "csvde.exe $csvdeArgs"
         }
 
     #Combine separate CSVDE exports into single file in working directory, while keeping single Header row
