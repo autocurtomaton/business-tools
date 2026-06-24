@@ -11,7 +11,7 @@ do{
         do{
             #Clear screen, show instructions
             Clear-Host
-            Get-Content _readme.txt | Write-Host
+            Get-Content _showtext.txt | Write-Host
 
             #Accept LDAP search term from user, repeat while input is null
             $searchTerm = Read-Host -Prompt 'Enter search term'
@@ -23,7 +23,7 @@ do{
         Write-Host -NoNewline "`n[OUs Located]:"
                 
         #$GroupList = Get-ADGroup -Filter {Name -like $searchTerm} | Select-Object -Property Name | Format-Table
-        if ($orgUnits -eq $null) {Write-Host ' NO OUs LOCATED -- Press ENTER to try again'; Read-Host}
+        if ($null -eq $orgUnits) {Write-Host ' NO OUs LOCATED -- Press ENTER to try again'; Read-Host}
         else {
         $orgUnits | Select-Object -Property Name,DistinguishedName | Format-Table
 
@@ -51,10 +51,10 @@ do{
         #samaccountname = output usernames
 
 
-        $args = ' -d ' + $unit.DistinguishedName + ' -n -l ' + $filters + ' -f ' + '.\' + '"' + $unit.DistinguishedName + '_powershell_' + $seed + '.csv"'
+        $csvdeArgs = ' -d ' + $unit.DistinguishedName + ' -n -l ' + $filters + ' -f ' + '.\' + '"' + $unit.DistinguishedName + '_powershell_' + $seed + '.csv"'
         
-        #$args
-        Invoke-Expression "csvde.exe $args"
+        #$csvdeArgs
+        Invoke-Expression "csvde.exe $csvdeArgs"
         }
 
     #Combine separate CSVDE exports into single file in working directory, while keeping single Header row
