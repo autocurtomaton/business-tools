@@ -1,10 +1,11 @@
 ﻿Import-Module ActiveDirectory
 $seed = Get-Random
 
-
+$domain = "" # your domain name
+$suffix = "Corp" # domain suffix
     
-$orgUnits = @('OU=ServiceAccounts,OU=ENT-Management,DC=DAVITA,DC=Corp',
-'OU=Svcaccts,DC=DAVITA,DC=Corp')
+$orgUnits = @("OU=ServiceAccounts,OU=ENT-Management,DC=$domain,DC=$suffix",
+"OU=Svcaccts,DC=$domain,DC=$suffix")
 
 #Run LDAP query using search term
 Write-Host -NoNewline "`n[OUs to Export]:"
@@ -22,17 +23,17 @@ Write-Host "`nExporting Members of OUs...."
 
 $filters = 'samaccountname,pwdLastSet' 
     
-#Interate through matching groups 
+#Iterate through matching groups 
 foreach ($unit in $orgUnits) {
 
     #-l filters column output for LDAP query, removing this parameter will output all possible LDAP attributes
     #samaccountname = output usernames
 
 
-    $args = ' -d ' + $unit.DistinguishedName + ' -n -l ' + $filters + ' -f ' + '.\' + '"' + $unit.DistinguishedName + '_powershell_' + $seed + '.csv"'
+    $csvdeArgs = ' -d ' + $unit.DistinguishedName + ' -n -l ' + $filters + ' -f ' + '.\' + '"' + $unit.DistinguishedName + '_powershell_' + $seed + '.csv"'
         
-    $args
-    Invoke-Expression "csvde.exe $args"
+    $csvdeArgs
+    Invoke-Expression "csvde.exe $csvdeArgs"
     }
 
 #Combine separate CSVDE exports into single file in working directory, while keeping single Header row

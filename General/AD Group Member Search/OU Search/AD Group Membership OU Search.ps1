@@ -44,7 +44,7 @@ do{
     Write-Host "Format is attribute1,attribute2,attribute3,..."
     $filters = Read-Host "(Example -- name,samaccountname,mail) "
     
-    #Interate through matching groups 
+    #Iterate through matching groups 
     foreach ($unit in $orgUnits) {
 
         #-l filters column output for LDAP query, removing this parameter will output all possible LDAP attributes

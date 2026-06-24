@@ -1,7 +1,10 @@
 ﻿Import-Module ActiveDirectory
 
-$OU1 = "OU=ServiceAccounts,OU=ENT-Management,DC=DAVITA,DC=Corp"
-$OU2 = "OU=Svcaccts,DC=DAVITA,DC=Corp"
+$domain = "" # your domain name
+$suffix = "Corp" # domain suffix
+
+$OU1 = "OU=ServiceAccounts,OU=ENT-Management,DC=$domain,DC=$suffix"
+$OU2 = "OU=Svcaccts,DC=$domain,DC=$suffix"
 $Properties = @("SamAccountName", "pwdLastSet")
 
 function Convert-FileTime {
