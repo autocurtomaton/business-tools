@@ -19,6 +19,7 @@
     v3.2.5
         - Reorder summary lines
         - EA8 missing only counted if Entra record is healthy
+        - testing
 #>
 
 
@@ -26,7 +27,7 @@
 [CmdletBinding()]
 param()
 
-$scriptVersion     = "3.2.5"
+$scriptVersion     = "3.2.6"
 $LogFolder         = "C:\_davsupp\Log.Files\Intune_IntlDeviceReadiness"
 $BulkImportFolder  = "C:\_davsupp\Intune_IntlDeviceReadiness"
 $BulkImportPath    = Join-Path $BulkImportFolder "EntraIntuneReadiness-Input.csv"
