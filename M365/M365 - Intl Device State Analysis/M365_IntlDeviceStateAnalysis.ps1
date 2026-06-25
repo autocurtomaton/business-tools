@@ -15,10 +15,9 @@
     Cannot derive certain AD attributes for pasted objects, like OU, so this will show a placeholder.
 
 .NOTES
-    v3.2.5
+    v3.2.6
         - Reorder summary lines
         - EA8 missing only counted if Entra record is healthy
-        - testing
 #>
 
 
