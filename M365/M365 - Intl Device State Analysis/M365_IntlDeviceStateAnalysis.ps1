@@ -26,8 +26,8 @@
 param()
 
 $scriptVersion     = "3.2.6"
-$LogFolder         = "C:\_support\Log.Files\Intune_IntlDeviceReadiness"
-$BulkImportFolder  = "C:\_support\Intune_IntlDeviceReadiness"
+$LogFolder         = "C:\_davsupp\Log.Files\Intune_IntlDeviceReadiness"
+$BulkImportFolder  = "C:\_davsupp\Intune_IntlDeviceReadiness"
 $BulkImportPath    = Join-Path $BulkImportFolder "EntraIntuneReadiness-Input.csv"
 $LogPath           = Join-Path $LogFolder "m365_EntraIntuneReadiness.log"
 $ExportFolder      = $LogFolder
